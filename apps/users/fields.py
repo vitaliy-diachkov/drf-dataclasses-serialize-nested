@@ -1,4 +1,4 @@
-from rest_framework.fields import CharField, Field
+from rest_framework.fields import Field
 
 
 class SocialSecurityNumberField(Field):

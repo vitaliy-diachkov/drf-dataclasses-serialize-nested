@@ -11,16 +11,7 @@ from apps.users.dataclasses import SocialSecurityNumber, User
 from apps.users.fields import SocialSecurityNumberField
 
 
-class MyDataclassSerializer(DataclassSerializer):
-    additional_mappings: dict[type, type[serializers.Field]] = {}
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.serializer_field_mapping = self.serializer_field_mapping.copy()
-        self.serializer_field_mapping.update(self.additional_mappings)
-
-
-class BaseUserSerializer(DataclassSerializer):
+class CustomDataclassSerializer(DataclassSerializer):
     serializer_field_mapping = {
         int:                  rest_framework.fields.IntegerField,
         float:                rest_framework.fields.FloatField,
@@ -37,11 +28,6 @@ class BaseUserSerializer(DataclassSerializer):
         SocialSecurityNumber: SocialSecurityNumberField
     }
 
-
-class UserSerializer(BaseUserSerializer):
-    class Meta:
-        dataclass = User
-
     @property
     def serializer_dataclass_field(self):
-        return BaseUserSerializer
+        return CustomDataclassSerializer

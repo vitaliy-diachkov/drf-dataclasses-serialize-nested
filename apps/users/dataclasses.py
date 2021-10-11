@@ -1,6 +1,4 @@
-from dataclasses import dataclass, field
-
-from apps.users.fields import SocialSecurityNumberField
+from dataclasses import dataclass
 
 
 @dataclass
